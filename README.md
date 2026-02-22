@@ -13,7 +13,7 @@
 **Table of Contents**
 
 - [💫 Description](#-description)
-- [🚀 Features](#-features)
+- [🌟 Features](#-features)
 - [📐 Architecture](#-architecture)
 - [🏗 Build Instructions](#-build-instructions)
   - [📝 Prerequisites](#-prerequisites)
@@ -26,10 +26,10 @@
   - [🔐 Security](#-security)
     - [⚠️ Warning](#-warning)
   - [🗄 Database](#-database)
-- [📜 License](#-license)
 - [📄 Changelog](#-changelog)
+- [📜 License](#-license)
 - [👤 Author](#-author)
-- [🤝 Code Contributors](#-code-contributors)
+  - [🤝 Code Contributors](#-code-contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
