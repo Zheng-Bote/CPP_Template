@@ -1,0 +1,164 @@
+/* =========================================================
+   FLUID BLUE UI – LAYOUTS
+   Header • Footer • Sidebar • Main • Responsive Height
+   ========================================================= */
+
+/* 1) Viewport-Variable: Default + Desktop-Override */
+:root {
+  --viewport-height: 100dvh; /* Mobile & Default */
+  /*--viewport-width: 100dvw;*/
+}
+
+/* =========================================================
+Smooth Theme Fade Transition
+ ========================================================= */
+/* Für alle UI-Container */
+body,
+.site-header,
+.site-footer,
+.sidebar,
+.site-main,
+.card,
+.btn,
+input,
+textarea,
+select {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --viewport-height: 100vh; /* Desktop */
+  }
+}
+
+/* 2) App-Shell: Header / Content / Footer */
+.app-shell {
+  min-height: var(--viewport-height);
+  /*min-width: var(--viewport-width);*/
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* 3) Header + Footer */
+.site-header,
+.site-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+
+  color: var(--text-muted);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  font-size: var(--font-size-smaller);
+
+  a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.35s ease;
+
+    &:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+  }
+}
+
+.header-left,
+.footer-left {
+  text-align: left;
+}
+.header-center,
+.footer-center {
+  text-align: center;
+}
+
+.header-right,
+.footer-right {
+  text-align: right;
+}
+
+.header-left {
+  cursor: pointer;
+}
+.header-left img {
+  width: 45px;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* 4) Main-Content ohne Sidebar */
+.site-main {
+  padding: var(--space-4);
+}
+
+hr {
+  border: 0.01em solid var(--border);
+}
+
+/* 5) Layout mit Sidebar (Dashboard, Settings, Profile) */
+
+/* Container sitzt in der mittleren Zeile der app-shell */
+.app-shell > .layout-with-sidebar {
+  grid-row: 2 / 3;
+  min-height: 0;
+  display: grid;
+}
+
+/* Desktop: Sidebar links, Content rechts */
+@media (min-width: 900px) {
+  .layout-with-sidebar {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .sidebar {
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+    padding: var(--space-4);
+    overflow-y: auto;
+  }
+
+  .layout-with-sidebar > .site-main {
+    padding: var(--space-4);
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
+
+/* Mobile: Sidebar oben, Content unten */
+@media (max-width: 899px) {
+  .layout-with-sidebar {
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-4);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .layout-with-sidebar > .site-main {
+    padding: var(--space-4);
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    max-width: 1600px;
+    margin: auto;
+  }
+}

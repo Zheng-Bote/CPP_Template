@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en" data-theme="auto" data-base-path="{{ base_path }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gh_docs_bot: {{ title }}</title>
+
+    <link rel="stylesheet" href="{{ base_path }}assets/css/tokens.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/layouts.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/fluid.css" />
+
+    <meta
+      name="description"
+      content="gh_docs_bot is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown and HTML files directly within your GitHub workflows."
+    />
+    <meta
+      name="keywords"
+      content="Github Action, Static Site Generator, SSG, Documentation, Markdown, HTML, GitHub Workflows, ZHENG Robert, Robert Zheng, ZHENG Bote, 郑 伯特"
+    />
+    <meta name="author" content="Zheng Robert" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+
+    <link
+      rel="icon"
+      href="{{ base_path }}assets/icons/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ base_path }}assets/icons/apple-touch-icon.png"
+    />
+    <link rel="shortcut icon" href="{{ base_path }}assets/favicon.ico" />
+  </head>
+
+  <body class="app-shell">
+    <header class="site-header">
+      <div class="header-left">
+        <img
+          src="{{ base_path }}assets/favicon.svg"
+          alt="Logo"
+          title="Home"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />gh_docs_bot
+      </div>
+      <div class="header-center">{{ title }}</div>
+      <div class="header-right flex items-center justify-end gap-3">
+        <button id="searchTrigger" class="btn btn-icon btn-ghost" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button id="share-btn" class="btn btn-icon btn-ghost" aria-label="Share" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="5" r="3"></circle>
+      <circle cx="6" cy="12" r="3"></circle>
+      <circle cx="18" cy="19" r="3"></circle>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+    </svg>
+  </button>
+  <button id="themeToggle" class="btn btn-icon btn-ghost">
+          <span id="themeIcon"></span>
+        </button>
+        <select id="themeSelect" class="select-control" style="width: auto">
+          <option value="blue">Blue</option>
+          <option value="emerald">Emerald</option>
+          <option value="amber">Amber</option>
+          <option value="berry">Berry</option>
+          <option value="violet">Violet</option>
+          <option value="slate">Slate</option>
+          <option value="cyan">Cyan</option>
+          <option value="blue2">Blue 2</option>
+          <option value="matrix">Matrix</option>
+          <option value="tron">Tron</option>
+        </select>
+        
+        <rz-fontsize> <rz-fontsize/>
+      </div>
+    </header>
+
+    <div class="layout-with-sidebar">
+      <aside class="sidebar">{{ navigation }}</aside>
+
+      <main class="site-main">
+        <div class="flex justify-between items-center mb-3">
+          {{ breadcrumbs }}
+          {% if show_reading_time %}
+            <span class="badge soft">⏱️ {{ reading_time }}</span>
+          {% endif %}
+        </div>
+        {{ content }}
+      </main>
+    </div>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Nach oben">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5" />
+        <path d="M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
+    <footer class="site-footer">
+      <div class="footer-left">
+        <a
+          href="https://github.com/Zheng-Bote/fluid_ui"
+          alt="Link to Github"
+          title="https://github.com/Zheng-Bote/fluid_ui"
+          >Build with Fluid UI</a
+        >
+      </div>
+      <div class="footer-center">
+        <a
+          href="https://www.robert.hase-zheng.net/"
+          alt="Homepage"
+          title="Homepage"
+          >© 2026 ZHENG Robert</a
+        >
+      </div>
+      <div class="footer-right">
+        <a
+          href="https://github.com/Zheng-Bote/gha_ghpages"
+          alt="Github"
+          title="Github"
+          >&lt;/&gt;</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      let brand = document.querySelector(".header-left");
+      if (brand) {
+        brand.addEventListener("click", () => {
+          window.location.href = "{{ base_path }}";
+        });
+      }
+    </script>
+
+   <script>
+      // Theme
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const themeSelect = document.getElementById("themeSelect");
+
+      // Reihenfolge der Modi
+      const modes = ["auto", "light", "dark"];
+
+      // --- SVG DEFINITIONEN ---
+      // Wir definieren die Icons ausserhalb der Funktion, damit sie nur einmal erstellt werden
+      const icons = {
+        light: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>`,
+        dark: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+               </svg>`,
+        auto: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 <mask id="mask-half">
+                   <rect x="0" y="0" width="12" height="24" fill="white" />
+                 </mask>
+                 <circle cx="12" cy="12" r="5"></circle>
+                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" mask="url(#mask-half)" />
+                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" transform="translate(2, -2) scale(0.9)" />
+               </svg>`
+      };
+
+      // Gespeicherte Werte laden
+      let currentTheme = localStorage.getItem("theme") || "blue2";
+      let currentMode = localStorage.getItem("mode") || "auto";
+
+      // Theme (Farbe) initial setzen
+      root.setAttribute("data-theme", currentTheme);
+
+      // Select initialisieren
+      if (themeSelect) {
+        themeSelect.value = currentTheme;
+        themeSelect.addEventListener("change", () => {
+          currentTheme = themeSelect.value;
+          root.setAttribute("data-theme", currentTheme);
+          localStorage.setItem("theme", currentTheme);
+        });
+      }
+
+      // --- LOGIK FÜR DARK MODE ---
+
+      function applyMode() {
+        let effectiveMode = currentMode;
+
+        // Wenn Auto gewählt ist, System abfragen
+        if (currentMode === "auto") {
+          const systemDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          effectiveMode = systemDark ? "dark" : "light";
+        }
+
+        root.setAttribute("data-mode", effectiveMode);
+        updateThemeIcon(currentMode);
+      }
+
+      // Icon-Setter (Korrigiert: Keine Verschachtelung mehr)
+      function updateThemeIcon(mode) {
+        if (icons[mode]) {
+          themeIcon.innerHTML = icons[mode];
+        } else {
+          themeIcon.innerHTML = icons['auto']; 
+        }
+      }
+
+      // Event Listener: Klick auf den Toggle-Button
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
+          currentMode = modes[nextIndex];
+
+          localStorage.setItem("mode", currentMode);
+          applyMode();
+        });
+      }
+
+      // Event Listener: System ändert Dark Mode
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          if (currentMode === "auto") {
+            applyMode();
+          }
+        });
+
+      // Initiale Ausführung beim Laden
+      applyMode();
+
+      /* --- Theme Preview Cards --- */
+      document.querySelectorAll("[data-theme-preview]").forEach((card) => {
+        card.addEventListener("click", () => {
+          const theme = card.getAttribute("data-theme-preview");
+          root.setAttribute("data-theme", theme);
+          localStorage.setItem("theme", theme);
+
+          if (themeSelect) {
+            themeSelect.value = theme;
+          }
+        });
+      });
+    </script>
+
+    <script>
+      // Utilities
+      /* -- Scroll to Top Button -- */
+      const scrollBtn = document.getElementById("scrollTopBtn");
+      const header = document.querySelector(".site-header");
+
+      // Sichtbarkeit steuern
+      window.addEventListener("scroll", () => {
+        const headerBottom = header.getBoundingClientRect().bottom;
+
+        if (headerBottom < -20) {
+          scrollBtn.classList.add("visible");
+        } else {
+          scrollBtn.classList.remove("visible");
+        }
+      });
+
+      // Smooth Scroll nach oben
+      if (scrollBtn) {
+        scrollBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      }
+      /* -- Ende Scroll to Top Button -- */
+
+      // Accordion
+      document.querySelectorAll(".accordion-header").forEach((header) => {
+        header.addEventListener("click", () => {
+          const item = header.closest(".accordion-item");
+          item.classList.toggle("is-open");
+        });
+      });
+
+      // Toast helper
+      function showToast(message, type = "info") {
+        let container = document.querySelector(".toast-container");
+        if (!container) {
+          container = document.createElement("div");
+          container.className = "toast-container";
+          document.body.appendChild(container);
+        }
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+
+        if (type === "success") toast.classList.add("success-msg");
+        if (type === "error") toast.classList.add("error-msg");
+        if (type === "warning") toast.classList.add("warning-msg");
+        if (type === "info") toast.classList.add("info-msg");
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.remove();
+        }, 3000);
+      }
+
+      // Modal helper (generic)
+      function openModal(id) {
+        const backdrop = document.getElementById(id);
+        if (backdrop) backdrop.classList.add("is-open");
+      }
+
+      function closeModal(id) {
+        const backdrop = document.getElementById(id);
+        if (backdrop) backdrop.classList.remove("is-open");
+      }
+
+      // Gallery Modal
+      const imageModal = document.getElementById("imageModal");
+      const modalImage = document.getElementById("modalImage");
+      const modalCaption = document.getElementById("modalCaption");
+
+      document.querySelectorAll(".gallery figure").forEach((fig) => {
+        fig.addEventListener("click", () => {
+          const src = fig.getAttribute("data-modal-image");
+          const caption = fig.querySelector("figcaption")?.textContent || "";
+          modalImage.src = src;
+          modalCaption.textContent = caption;
+          openModal("imageModal");
+        });
+      });
+      document.querySelectorAll(".gallery-2 figure").forEach((fig) => {
+        fig.addEventListener("click", () => {
+          const src = fig.getAttribute("data-modal-image");
+          const caption = fig.querySelector("figcaption")?.textContent || "";
+          modalImage.src = src;
+          modalCaption.textContent = caption;
+          openModal("imageModal");
+        });
+      });
+
+      // Close modal on backdrop click
+      if (imageModal) {
+        imageModal.addEventListener("click", (e) => {
+          if (e.target === imageModal) {
+            closeModal("imageModal");
+          }
+        });
+      }
+
+      // =========================================================
+      // Lazy Loading for Gallery Images
+      // =========================================================
+
+      const lazyImages = document.querySelectorAll(".lazy-img");
+
+      const lazyObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const img = entry.target;
+            const realSrc = img.getAttribute("data-src");
+
+            if (realSrc) {
+              img.src = realSrc;
+              img.onload = () => img.classList.add("loaded");
+            }
+
+            observer.unobserve(img);
+          });
+        },
+        {
+          rootMargin: "200px 0px", // lädt frühzeitig
+          threshold: 0.01,
+        },
+      );
+
+      lazyImages.forEach((img) => lazyObserver.observe(img));
+      // =========================================================
+    </script>
+
+    <script>
+      // =========================================================
+      // Share-Button
+      // =========================================================
+      shareBtn();
+ function shareBtn() {
+  const shareBtn = document.getElementById('share-btn');
+  if (!shareBtn) return;
+
+  // Button IMMER anzeigen (da wir jetzt einen Fallback haben)
+  shareBtn.style.display = 'inline-flex';
+
+  shareBtn.addEventListener('click', async () => {
+    // 1. Versuch: Native Web Share API (Mobile / unterstützte Browser)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          text: document.querySelector('meta[name="description"]')?.content || '',
+          url: window.location.href,
+        });
+        return; // Wenn erfolgreich, hier aufhören
+      } catch (err) {
+        // Abbruch durch User ist okay, Fehler loggen
+        if (err.name !== 'AbortError') console.debug('Share failed:', err);
+      }
+    }
+
+    // 2. Fallback: URL in die Zwischenablage kopieren (Desktop)
+    console.info('URL copied to clipboard');
+    showToast('URL copied to clipboard', 'success');
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+
+      // Visuelles Feedback: Icon kurz ändern
+      const originalIcon = shareBtn.innerHTML;
+
+      // Checkmark Icon (passend zum Feather-Stil)
+      shareBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-color);">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      `;
+
+      // Nach 2 Sekunden zurücksetzen
+      setTimeout(() => {
+        shareBtn.innerHTML = originalIcon;
+      }, 2000);
+    } catch (err) {
+      console.error('Clipboard failed:', err);
+      alert('Could not copy URL. Please copy it manually.');
+    }
+  });
+}
+     
+      // =========================================================
+    </script>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal-backdrop">
+      <div class="modal" style="max-width: 600px; height: 80vh; display: flex; flex-direction: column; padding: 0;">
+        <div class="p-4 border-b flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="field-control" style="border:none; box-shadow: none; font-size: 1.1rem;" placeholder="Search docs... (Press /)" autocomplete="off">
+          <button id="searchClose" class="btn btn-icon btn-ghost btn-sm">✕</button>
+        </div>
+        <div id="searchResults" style="overflow-y: auto; flex: 1; padding: 0;"></div>
+      </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal-backdrop">
+      <div class="modal" style="text-align: center; max-width: 90vw; width: auto;">
+        <button class="modal-close" onclick="closeModal('imageModal')">✕</button>
+        <img id="modalImage" class="modal-image" src="" alt="Gallery View" />
+        <div id="modalCaption" class="text-muted mt-2" style="font-size: 0.9rem;"></div>
+      </div>
+    </div>
+
+    <script type="module" src="{{ base_path }}assets/js/search.js"></script>
+    <script type="module" src="{{ base_path }}assets/js/rz-fontsize.js"></script>
+  </body>
+</html>

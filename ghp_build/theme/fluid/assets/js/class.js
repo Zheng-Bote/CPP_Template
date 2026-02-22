@@ -1,0 +1,1 @@
+import{a as c}from"./attributes.js";import{x as e}from"./custom-element.js";function _(s,f,r,i,p,l){var a=s.__className;if(e||a!==r||a===void 0){var t=c(r,i);(!e||t!==s.getAttribute("class"))&&(t==null?s.removeAttribute("class"):s.className=t),s.__className=r}return l}export{_ as s};

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en" data-theme="auto" data-base-path="{{ base_path }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gh_docs_bot: {{ title }}</title>
+
+    <link rel="preconnect" href="{{ base_path }}" />
+
+    <link rel="preload" as="style" href="{{ base_path }}assets/css/tokens.css" />
+    <link rel="preload" as="style" href="{{ base_path }}assets/css/layouts.css" />
+    <link rel="preload" as="style" href="{{ base_path }}assets/css/fluid.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/tokens.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/layouts.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/fluid.css" />
+
+    <meta
+      name="description"
+      content="gh_docs_bot is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown and HTML files directly within your GitHub workflows."
+    />
+    <meta
+      name="keywords"
+      content="Github Action, Static Site Generator, SSG, Documentation, Markdown, HTML, GitHub Workflows, ZHENG Robert, Robert Zheng, ZHENG Bote, 郑 伯特"
+    />
+    <meta name="author" content="Zheng Robert" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+
+    <link
+      rel="icon"
+      href="{{ base_path }}assets/icons/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ base_path }}assets/icons/apple-touch-icon.png"
+    />
+    <link rel="shortcut icon" href="{{ base_path }}assets/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="gh_docs_bot: Static Site Generator"
+    />
+    <meta
+      property="og:description"
+      content="gh_docs_bot is a high-performance C++ Static Site Generator (SSG) built as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown, HTML, AsciiDoc, and Office files (ODT/DOCX) directly within your GitHub workflows."
+    />
+    <meta property="og:site_name" content="gh_docs_bot" />
+    <meta property="og:url" content="https://github.com/Zheng-Bote/gha_ghpages" />
+    <meta property="og:image" content="https://github.com/Zheng-Bote/gha_ghpages/assets/ssg-logo_500x500.png" />
+    <meta
+      property="og:image:alt"
+      content="gh_docs_bot: Static Site Generator"
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="gh_docs_bot: Static Site Generator"
+    />
+    <meta
+      name="twitter:description"
+      content="gh_docs_bot is a high-performance C++ Static Site Generator (SSG) built as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown, HTML, AsciiDoc, and Office files (ODT/DOCX) directly within your GitHub workflows."
+    />
+    <meta
+      name="twitter:image"
+      content="https://github.com/Zheng-Bote/gha_ghpages/assets/ssg-logo_500x500.png"
+    />
+  </head>
+
+  <body class="app-shell">
+    <header class="site-header">
+      <div class="header-left">
+        <img
+          src="{{ base_path }}assets/favicon.svg"
+          alt="Logo"
+          title="Home"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />gh_docs_bot
+      </div>
+      <div class="header-center">{{ title }}</div>
+      <div class="header-right flex items-center justify-end gap-3">
+        <button id="searchTrigger" class="btn btn-icon btn-ghost" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button id="share-btn" class="btn btn-icon btn-ghost" aria-label="Share" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </button>
+        <button id="themeToggle" class="btn btn-icon btn-ghost">
+          <span id="themeIcon"></span>
+        </button>
+        <select id="themeSelect" class="select-control" style="width: auto">
+          <option value="blue">Blue</option>
+          <option value="emerald">Emerald</option>
+          <option value="amber">Amber</option>
+          <option value="berry">Berry</option>
+          <option value="violet">Violet</option>
+          <option value="slate">Slate</option>
+          <option value="cyan">Cyan</option>
+          <option value="blue2">Blue 2</option>
+          <option value="matrix">Matrix</option>
+          <option value="tron">Tron</option>
+        </select>
+        
+        <rz-fontsize> <rz-fontsize/>
+      </div>
+    </header>
+
+    <div class="layout-with-sidebar">
+      <aside class="sidebar">{{ navigation }}</aside>
+
+      <main class="site-main">
+        <div class="flex justify-between items-center mb-3">
+          {{ breadcrumbs }}
+          {% if show_reading_time %}
+            <span class="badge soft">⏱️ {{ reading_time }}</span>
+          {% endif %}
+        </div>
+        {{ content }}
+      </main>
+    </div>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Nach oben">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5" />
+        <path d="M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
+    <footer class="site-footer">
+      <div class="footer-left">
+        <a
+          href="https://github.com/Zheng-Bote/fluid_ui"
+          alt="Link to Github"
+          title="https://github.com/Zheng-Bote/fluid_ui"
+          >Build with Fluid UI</a
+        >
+      </div>
+      <div class="footer-center">
+        <a
+          href="https://www.robert.hase-zheng.net/"
+          alt="Homepage"
+          title="Homepage"
+          >© 2026 ZHENG Robert</a
+        >
+      </div>
+      <div class="footer-right">
+        <a
+          href="https://github.com/Zheng-Bote/gha_ghpages"
+          alt="Github"
+          title="Github"
+          >&lt;/&gt;</a
+        >
+      </div>
+    </footer>
+
+    <div id="searchModal" class="modal-backdrop">
+      <div class="modal" style="max-width: 600px; height: 80vh; display: flex; flex-direction: column; padding: 0;">
+        <div class="p-4 border-b flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="field-control" style="border:none; box-shadow: none; font-size: 1.1rem;" placeholder="Search docs... (Press /)" autocomplete="off">
+          <button id="searchClose" class="btn btn-icon btn-ghost btn-sm">✕</button>
+        </div>
+        <div id="searchResults" style="overflow-y: auto; flex: 1; padding: 0;"></div>
+      </div>
+    </div>
+
+    <div id="imageModal" class="modal-backdrop">
+      <div class="modal" style="text-align: center; max-width: 90vw; width: auto; position: relative;">
+        <button class="modal-close" onclick="closeModal('imageModal')" style="position: absolute; top: 10px; right: 10px;">✕</button>
+        <img id="modalImage" class="modal-image" src="" alt="Gallery View" style="max-height: 80vh; max-width: 100%; object-fit: contain;" />
+        <div id="modalCaption" class="text-muted mt-2" style="font-size: 0.9rem;"></div>
+      </div>
+    </div>
+
+    <script type="module" src="{{ base_path }}assets/js/search.js"></script>
+    <script type="module" src="{{ base_path }}assets/js/rz-fontsize.js"></script>
+    
+    <script src="{{ base_path }}assets/js/fluid_core.js" defer></script>
+    <script src="{{ base_path }}assets/js/fluid_theme.js" defer></script>
+    <script src="{{ base_path }}assets/js/fluid_gallery.js" defer></script>
+    <script src="{{ base_path }}assets/js/fluid_share.js" defer></script>
+  </body>
+</html>

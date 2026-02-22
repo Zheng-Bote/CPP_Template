@@ -1,0 +1,1 @@
+import{k as n,c as o,t as r,l,b as u,e as i,i as m,g as s,a as _,r as f,j as p}from"./custom-element.js";const b=(a,t)=>{m(t,s(t)+1)};var d=r("<button> </button>");function g(a){let t=l(0);var e=d();e.__click=[b,t];var c=_(e);f(e),u(()=>p(c,`count is ${s(t)??""}`)),i(a,e)}n(["click"]);customElements.define("rz-counter",o(g,{},[],[],!0));

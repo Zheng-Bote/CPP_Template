@@ -1,0 +1,381 @@
+:root {
+  --tron-cyan: oklch(0.75 0.18 210);
+  --tron-glow: oklch(0.75 0.18 210 / 0.3);
+  --ob-white: oklch(0.98 0.01 210);
+  --ob-glass: oklch(1 0 0 / 0.04);
+  --primary-bg: #000206;
+  --font-main: "Inter", system-ui, sans-serif;
+  --font-tron: "Orbitron", sans-serif;
+  --border-glow: 1px solid var(--tron-glow);
+  --glass-blur: blur(12px);
+  --border-radius: 12px;
+  --universal-padding: 1rem;
+}
+
+@starting-style {
+  html {
+    font-display: swap;
+  }
+  body {
+    background-color: var(--primary-bg);
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+html {
+  height: 100%;
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  background-color: var(--primary-bg);
+  color: var(--ob-white);
+  background-image: linear-gradient(var(--tron-glow) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tron-glow) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-attachment: fixed;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  display: grid;
+  grid-template-areas: "header" "aside" "main" "footer";
+  grid-template-rows: 80px auto 1fr auto;
+}
+
+/* --- GLOBAL LINKS --- */
+a:link,
+a:active,
+a:visited {
+  color: var(--ob-white);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* --- HEADER & FOOTER --- */
+header,
+footer {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  backdrop-filter: var(--glass-blur);
+  background: var(--ob-glass);
+  z-index: 10;
+}
+
+header {
+  grid-area: header;
+  border-bottom: var(--border-glow);
+}
+
+footer {
+  grid-area: footer;
+  height: 60px;
+  border-top: var(--border-glow);
+  font-family: var(--font-tron);
+  color: var(--tron-cyan);
+  font-size: 0.7rem;
+}
+
+.header_left {
+  cursor: pointer;
+  & img {
+    width: 30px;
+    height: auto;
+    decoding: auto;
+    vertical-align: middle;
+  }
+}
+
+.header_left,
+.footer-section_left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.header_middle,
+.footer-section_center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.header_right,
+.footer-section_right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+header h1 {
+  font-family: var(--font-tron);
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: var(--tron-cyan);
+  margin-left: 15px;
+  text-shadow: 0 0 10px var(--tron-glow);
+}
+
+/* --- BUTTONS (Header only) --- */
+.tron-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid var(--tron-cyan);
+  color: var(--tron-cyan);
+  font-family: var(--font-tron);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.tron-btn:hover {
+  background: var(--tron-cyan);
+  color: #000;
+  box-shadow: 0 0 15px var(--tron-cyan);
+}
+
+/* --- ASIDE NAV (OPTIMIZED HIERARCHY) --- */
+aside {
+  grid-area: aside;
+  padding: 20px;
+  background: var(--ob-glass);
+  border-bottom: var(--border-glow);
+  overflow-y: auto; /* Scrollbar wenn Menü zu lang */
+}
+
+/* Reset Lists */
+.nav-list,
+.nav-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Level 1: Container Gap */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Level 1: Folder Title (Das <strong> Tag) */
+.nav-list > li > strong {
+  display: block;
+  font-family: var(--font-tron);
+  color: var(--tron-cyan);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--tron-glow);
+  opacity: 0.9;
+}
+
+/* Level 2 & 3: Nested Wrapper (Recursive) */
+.nav-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 10px; /* Einrückung */
+  padding-left: 10px; /* Platz für die Linie */
+  border-left: 1px solid var(--tron-glow); /* Die "Tree-Line" */
+}
+
+/* Links in Navigation (Level 2 & 3) */
+.nav-list a {
+  display: block;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  color: var(--ob-white);
+  border-radius: 4px;
+  border: 1px solid transparent; /* Reserviert Platz für Border bei Hover */
+  opacity: 0.8;
+}
+
+/* Links Hover Effect */
+.nav-list a:hover,
+.nav-list a.active {
+  background: var(--tron-glow);
+  color: var(--tron-cyan);
+  border-color: var(--tron-cyan);
+  box-shadow: 0 0 10px var(--tron-glow);
+  text-decoration: none;
+  opacity: 1;
+  transform: translateX(5px); /* Kleiner "Slide" nach rechts */
+}
+
+/* Sub-Folders (Level 2+ Ordner Titel) - UPDATED */
+.nav-list ul strong {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--tron-cyan); /* JETZT CYAN */
+  margin-top: 8px;
+  margin-bottom: 4px;
+  padding-left: 5px;
+  font-weight: bold;
+  opacity: 0.85; /* Leicht erhöht für bessere Lesbarkeit */
+  letter-spacing: 0.5px;
+}
+
+/* --- MAIN CONTENT --- */
+main {
+  grid-area: main;
+  margin: 15px;
+  padding: 25px;
+  background: oklch(1 0 0 / 0.04);
+  backdrop-filter: var(--glass-blur);
+  border: var(--border-glow);
+  border-radius: var(--border-radius);
+  min-height: 400px;
+}
+
+main h1 {
+  font-family: var(--font-tron);
+  color: var(--tron-cyan);
+  margin-top: 0;
+}
+main h2,
+main h3 {
+  font-family: var(--font-tron);
+  color: var(--ob-white);
+  border-bottom: 1px solid var(--tron-glow);
+  padding-bottom: 5px;
+}
+
+/* --- coding --- */
+code,
+kbd,
+pre,
+samp {
+  font-family: Menlo, Consolas, monospace;
+  margin: 0 20px 0 20px;
+}
+
+code {
+  background: #333333; /* Dunkelgrau */
+  color: #00ff41; /* Matrix-Grün (alternativ: 'lime' oder '#4caf50') */
+  text-wrap: pretty;
+  padding: var(--universal-padding);
+  width: fit-content;
+  max-width: 100%;
+
+  /* Ergänzungen für den "Rechteck"-Look */
+  display: inline-block; /* Stellt sicher, dass es ein Block/Rechteck bildet */
+  border-radius: 4px; /* Optional: Leicht abgerundete Ecken */
+  border: 1px solid #444; /* Optional: Subtiler Rand zur Abgrenzung */
+}
+
+/* --- TRON THEME CARD GRID --- */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-wrapper {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35ch, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card Container (Glass) */
+.card {
+  background: var(--ob-glass);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--tron-glow); /* Subtiler Glow Rahmen */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(45, 226, 230, 0.05); /* Sehr schwacher Glow */
+  padding-bottom: 1rem;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.card:hover {
+  border-color: var(--tron-cyan);
+  box-shadow: 0 0 15px var(--tron-glow);
+}
+
+/* Typography */
+.card h3 {
+  margin: 1rem;
+  font-family: var(--font-tron); /* Orbitron */
+  font-size: 1.1rem;
+  color: var(--tron-cyan);
+  letter-spacing: 1px;
+}
+
+.card p,
+.card ul {
+  margin: 0 1rem;
+  font-family: var(--font-main);
+  color: var(--ob-white);
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.card ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Image Styling */
+.card img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid var(--tron-glow);
+
+  transition: transform 0.35s ease, z-index 0s;
+  transform-origin: center 40%; /* Zoom etwas höher ansetzen */
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover zoom outside */
+.card img:hover {
+  transform: scale(2);
+  z-index: 100;
+  cursor: zoom-in;
+
+  border-radius: 8px;
+  border: 1px solid var(--tron-cyan);
+  box-shadow: 0 0 20px var(--tron-glow); /* Starker Neon Glow beim Zoom */
+  background: #000206; /* Background damit man Text darunter nicht sieht */
+}
+
+/* --- DESKTOP LAYOUT --- */
+@media screen and (min-width: 1024px) {
+  body {
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 80px 1fr auto;
+    grid-template-areas:
+      "header header"
+      "aside main"
+      "footer footer";
+    max-width: 1600px;
+    margin: auto;
+  }
+
+  aside {
+    border-bottom: none;
+    border-right: var(--border-glow);
+    padding: 30px 20px;
+  }
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de" data-theme="auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }} – Fluid UI</title>
+
+    <link rel="stylesheet" href="{{ base_path }}assets/css/tokens.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/layouts.css" />
+    <link rel="stylesheet" href="{{ base_path }}assets/css/fluid.css" />
+  </head>
+
+  <body class="app-shell">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-left">Fluid UI</div>
+      <div class="header-center">{{ title }}</div>
+      <div class="header-right flex items-center justify-end gap-3">
+        <!-- Theme Select -->
+        <select id="themeSelect" class="select-control" style="width: auto">
+          <option value="blue">Blue</option>
+          <option value="emerald">Emerald</option>
+          <option value="amber">Amber</option>
+          <option value="berry">Berry</option>
+          <option value="violet">Violet</option>
+          <option value="slate">Slate</option>
+          <option value="cyan">Cyan</option>
+        </select>
+        <!-- Mode Switcher Buttons -->
+        <button id="themeToggle" class="btn btn-icon btn-ghost">
+          <span id="themeIcon"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN AREA -->
+    <div class="layout-with-sidebar">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-nav">
+          <h3>Navigation</h3>
+          {{ navigation }}
+        </div>
+        
+        <div class="sidebar-toc">
+          {% if toc %}
+          <h3>Inhalt</h3>
+          {{ toc }}
+          {% endif %}
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <main class="site-main">
+        {{ content }}
+      </main>
+    </div>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Nach oben">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5" />
+        <path d="M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-left">© 2026</div>
+      <div class="footer-center">Fluid Blue UI</div>
+      <div class="footer-right">v1.0</div>
+    </footer>
+
+    <script src="{{ base_path }}assets/js/theme.js"></script>
+    <script src="{{ base_path }}assets/js/utilities.js" defer></script>
+  </body>
+</html>
