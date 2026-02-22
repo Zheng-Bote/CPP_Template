@@ -10,6 +10,26 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [💫 Description](#-description)
+- [🚀 Features](#-features)
+- [📐 Architecture](#-architecture)
+- [🏗 Build Instructions](#-build-instructions)
+  - [📝 Prerequisites](#-prerequisites)
+  - [🛠 Steps](#-steps)
+  - [📦 Packaging](#-packaging)
+- [🛡️ CI/CD & Build Breaker](#-cicd--build-breaker)
+  - [💻 Usage](#-usage)
+- [📚 Documentation](#-documentation)
+  - [📸 Screenshots](#-screenshots)
+  - [🔐 Security](#-security)
+    - [⚠️ Warning](#-warning)
+  - [🗄 Database](#-database)
+- [📜 License](#-license)
+- [📄 Changelog](#-changelog)
+- [👤 Author](#-author)
+- [🤝 Code Contributors](#-code-contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
