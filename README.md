@@ -23,7 +23,7 @@
 ![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-## 🚀 Features
+## 🌟 Features
 
 ## 📐 Architecture
 
@@ -51,21 +51,21 @@
 
 ---
 
+## 📄 Changelog
+
+For a detailed history of changes, see the [CHANGELOG.md](CHANGELOG.md).
+
 ## 📜 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Copyright (c) 2026 ZHENG Robert
-
-## 📄 Changelog
-
-For a detailed history of changes, see the [CHANGELOG.md](CHANGELOG.md).
+©️ Copyright (c) 2026 ZHENG Robert
 
 ## 👤 Author
 
 [![Zheng Robert - Core Development](https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github)](https://www.github.com/Zheng-Bote)
 
-## 🤝 Code Contributors
+### 🤝 Code Contributors
 
 ![Contributors](https://img.shields.io/github/contributors/Zheng-Bote/cpp_template?color=dark-green)
 
