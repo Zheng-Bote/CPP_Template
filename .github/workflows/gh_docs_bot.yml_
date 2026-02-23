@@ -23,13 +23,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build and Generate Site
-        uses: ./
+        uses: Zheng-Bote/gha_ghpages@v2.1.0
         with:
-          template: "theme/desktop/fluid_template.html"
-          assets: "theme/fluid/assets"
+          template: "ghp_build/template/fluid_template.html"
+          assets: "ghp_build/theme/fluid/assets"
           output: "public"
           docs: "docs"
           base_path: "https://zheng-bote.github.io/gha_ghpages/"
+          toc: true
+          plugins: "docs/plugins"          
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

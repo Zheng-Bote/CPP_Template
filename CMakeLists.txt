@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(CPP_Template 
     VERSION 1.0.0
     DESCRIPTION "CPP Template"
-    HOMEPAGE_URL "https://github.com/Zheng-Bote/cpp_template"
+    HOMEPAGE_URL "https://github.com/Zheng-Bote/CPP_Template"
     LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -20,16 +20,24 @@ set(PROG_ORGANIZATION_DOMAIN "net.hase-zheng")
 add_subdirectory(configure) 
 
 # libcurl via find_package (System-abhängig)
-find_package(CURL REQUIRED)
+#find_package(CURL REQUIRED)
 
-# --- 1. Dependencies via FetchContent ---
+# --- Dependencies via FetchContent ---
 include(FetchContent)
+
 FetchContent_Declare(
-    qt_gh_update_checker
-    GIT_REPOSITORY https://github.com/Zheng-Bote/qt_gh_update_checker.git
+    curl
+    GIT_REPOSITORY https://github.com/curl/curl.git
+    GIT_TAG curl-8_7_1
+)
+FetchContent_MakeAvailable(curl)
+
+FetchContent_Declare(
+    gh_update_checker
+    GIT_REPOSITORY https://github.com/Zheng-Bote/gh-update-checker.git
     GIT_TAG v1.0.0
 )
-FetchContent_MakeAvailable(qt_gh_update_checker)
+FetchContent_MakeAvailable(gh_update_checker)
 
 FetchContent_Declare(
   nlohmann_json
@@ -37,6 +45,26 @@ FetchContent_Declare(
   GIT_TAG        v3.11.3
 )
 
+FetchContent_Declare(
+  inifile-cpp
+  GIT_REPOSITORY https://github.com/Rookfighter/inifile-cpp.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(inifile-cpp)
+
+FetchContent_Declare(
+    cli11
+    GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+    GIT_TAG v2.4.1
+)
+FetchContent_MakeAvailable(cli11)
+
+FetchContent_Declare(
+    dotenv-cpp
+    GIT_REPOSITORY https://github.com/laserpants/dotenv-cpp.git
+    GIT_TAG        master
+)
+FetchContent_MakeAvailable(dotenv-cpp)
 
 include_directories(include)
 
@@ -49,11 +77,19 @@ add_executable(${PROJECT_NAME}
     ${SOURCES}
 )
 
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
+
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+        ${inifile-cpp_SOURCE_DIR}/include
+)
 target_link_libraries(${PROJECT_NAME} PRIVATE 
 
     nlohmann_json::nlohmann_json
     gh_update_checker
     libcurl
+    CLI11::CLI11
+    dotenv
 )
 
 # Standard flags
@@ -65,7 +101,7 @@ endif()
 
 # --- 4. Installation ---
 include(GNUInstallDirs)
-install(TARGETS QtDependencyTrackerUI
+install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
