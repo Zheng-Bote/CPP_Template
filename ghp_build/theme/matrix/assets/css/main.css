@@ -51,7 +51,8 @@ html {
   background-color: black;
   color: var(--matrix-green);
   /* Digital Rain Background Effect (CSS Pattern) */
-  background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
   background-attachment: fixed;
@@ -277,7 +278,8 @@ main {
   border-right: 1px solid rgba(0, 50, 0, 0.8);
 
   /* Schatten für Tiefe */
-  box-shadow: rgba(0, 255, 65, 0.1) -5px -5px 15px inset,
+  box-shadow:
+    rgba(0, 255, 65, 0.1) -5px -5px 15px inset,
     /* Inner Glow */ rgba(0, 0, 0, 0.5) 10px 10px 20px; /* Outer Shadow */
 
   padding: 40px; /* Genug Platz innen */
@@ -409,7 +411,10 @@ img {
   filter: sepia(100%) hue-rotate(90deg) saturate(1.5) contrast(1.2);
   opacity: 0.8;
 
-  transition: transform 0.35s ease, z-index 0s, filter 0.2s;
+  transition:
+    transform 0.35s ease,
+    z-index 0s,
+    filter 0.2s;
   transform-origin: center;
   position: relative;
   z-index: 1;

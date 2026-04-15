@@ -1,4 +1,4 @@
-name: Update Markdown TOC
+name: update Markdown TOC
 
 # Author: Robert Zheng
 # created: 2026-04-15
@@ -6,7 +6,7 @@ name: Update Markdown TOC
 # version: 1.0.0
 # description: update markdown table of contents
 
-run-name: Update Markdown TOC by ${{ github.actor }}
+run-name: update Markdown TOC by ${{ github.actor }}
 
 # Glob‑Support eg.: docs/**/*.md
 # MARKER_START = "<!-- START doctoc generated TOC please keep comment here to allow auto update -->"

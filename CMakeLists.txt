@@ -35,7 +35,7 @@ FetchContent_MakeAvailable(curl)
 FetchContent_Declare(
     gh_update_checker
     GIT_REPOSITORY https://github.com/Zheng-Bote/gh-update-checker.git
-    GIT_TAG v1.0.0
+    GIT_TAG v1.0.8
 )
 FetchContent_MakeAvailable(gh_update_checker)
 
