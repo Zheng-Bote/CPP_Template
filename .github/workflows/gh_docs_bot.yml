@@ -26,7 +26,7 @@ jobs:
         uses: Zheng-Bote/gha_ghpages@v2.1.0
         with:
           template: "ghp_build/templates/fluid_template.html"
-          assets: "ghp_build/themes/fluid/assets"
+          assets: "ghp_build/theme/fluid/assets"
           output: "public"
           docs: "docs"
           base_path: "https://zheng-bote.github.io/CPP_Template/"
