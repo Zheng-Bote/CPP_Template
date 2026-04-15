@@ -1,7 +1,17 @@
 [
 {
-"content": " CPP Template License: MIT Platform GitHub release (latest by date) Report Issue · Request Feature Table of Contents 💫 Description 🌟 Features 📐 Architecture 🏗 Build Instructions 📝 Prerequisites 🛠 Steps 📦 Packaging 🛡️ CI/CD & Build Breaker 📚 Documentation 💻 Usage 📸 Screenshots 🔐 Security ⚠️ Warning 🗄 Database 📄 Changelog 📜 License 👤 Author 🤝 Code Contributors 💫 Description Language CMake Framework Platform License 🌟 Features 📐 Architecture 🏗 Build Instructions 📝 Prerequisites 🛠 Steps 📦 Packaging 🛡️ CI/CD & Build Breaker 📚 Documentation 💻 Usage 📸 Screenshots 🔐 Security ⚠️ Warning 🗄 Database 📄 Changelog For a detailed history of changes, see the CHANGELOG.md . 📜 License This project is licensed under the MIT License - see the LICENSE file for details. ©️ Copyright (c) 2026 ZHENG Robert 👤 Author Zheng Robert - Core Development 🤝 Code Contributors Contributors Happy coding! 🚀 🖖 ",
+"content": " CPP Template c++23 (Qt6) Template with CMake, CI and GH-Pages License Platform GitHub release (latest by date) Report Issue · Request Feature Table of Contents 💫 Description 🌟 Features 📐 Architecture 🏗 Build Instructions 📝 Prerequisites 🛠 Steps 📦 Packaging 🛡️ CI/CD & Build Breaker 📚 Documentation 💻 Usage 📸 Screenshots 🔐 Security ⚠️ Warning 🗄 Database 📄 Changelog 📜 License 👤 Author 🤝 Code Contributors 💫 Description Language CMake Framework Platform License 🌟 Features 📐 Architecture 🏗 Build Instructions 📝 Prerequisites 🛠 Steps 📦 Packaging 🛡️ CI/CD & Build Breaker 📚 Documentation 💻 Usage 📸 Screenshots 🔐 Security ⚠️ Warning 🗄 Database 📄 Changelog For a detailed history of changes, see the CHANGELOG.md . 📜 License This project is licensed under the Apache 2.0 License - see the LICENSE file for details. ©️ Copyright (c) 2026 ZHENG Robert 👤 Author Zheng Robert - Core Development 🤝 Code Contributors Contributors Happy coding! 🚀 🖖 ( back to top ) ",
 "title": "index",
 "url": "index.html"
+},
+{
+"content": " Links GitHub GitHub Pages ",
+"title": "link",
+"url": "HowTo/link.html"
+},
+{
+"content": " Test just a test ",
+"title": "test",
+"url": "HowTo/test.html"
 }
 ]
