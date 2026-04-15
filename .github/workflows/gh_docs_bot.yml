@@ -45,9 +45,9 @@ jobs:
           branch: gh-pages
           folder: public
 
-      - name: Deploy to main (public folder)
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: main
-          folder: public
-          target-folder: public
+      #- name: Deploy to main (public folder)
+      #  uses: JamesIves/github-pages-deploy-action@v4
+      #  with:
+      #    branch: main
+      #    folder: public
+      #    target-folder: public
