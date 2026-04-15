@@ -4,6 +4,9 @@
 
 c++23 (Qt6) Template with CMake, CI and GH-Pages
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 💫 Description
 
 ![Language](https://img.shields.io/badge/language-C%2B%2B23-00599C.svg)
