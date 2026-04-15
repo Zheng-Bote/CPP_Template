@@ -10,6 +10,8 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 
+
+---
 <details>
 <summary>Table of Contents</summary>
 
@@ -33,6 +35,8 @@
   - [🤝 Code Contributors](#code-contributors)
 
 </details>
+---
+
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
