@@ -18,6 +18,10 @@ on:
         required: false
         default: "true"
 
+permissions:
+  checks: write
+  contents: write
+
 jobs:
   update-toc:
     runs-on: ubuntu-latest
