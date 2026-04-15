@@ -1,10 +1,15 @@
-# CPP Template
+<div id="top" align="center">
+<h1>CPP Template</h1>
+
+<p>c++23 (Qt6) Template with CMake, CI and GH-Pages</p>
 
 ![License](https://img.shields.io/badge/license-Apache_2.0-green)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey.svg)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/cpp_template?logo=GitHub)](https://github.com/Zheng-Bote/cpp_template/releases)
 
 [Report Issue](https://github.com/Zheng-Bote/cpp_template/issues) · [Request Feature](https://github.com/Zheng-Bote/cpp_template/pulls)
+
+</div>
 
 ---
 
@@ -13,24 +18,24 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [💫 Description](#description)
-- [🌟 Features](#features)
-- [📐 Architecture](#architecture)
-- [🏗 Build Instructions](#build-instructions)
-  - [📝 Prerequisites](#prerequisites)
-  - [🛠 Steps](#steps)
-  - [📦 Packaging](#packaging)
-- [🛡️ CI/CD & Build Breaker](#cicd-build-breaker)
-- [📚 Documentation](#documentation)
-  - [💻 Usage](#usage)
-  - [📸 Screenshots](#screenshots)
-  - [🔐 Security](#security)
-    - [⚠️ Warning](#warning)
-  - [🗄 Database](#database)
-- [📄 Changelog](#changelog)
-- [📜 License](#license)
-- [👤 Author](#author)
-  - [🤝 Code Contributors](#code-contributors)
+- [💫 Description](#-description)
+- [🌟 Features](#-features)
+- [📐 Architecture](#-architecture)
+- [🏗 Build Instructions](#-build-instructions)
+  - [📝 Prerequisites](#-prerequisites)
+  - [🛠 Steps](#-steps)
+  - [📦 Packaging](#-packaging)
+- [🛡️ CI/CD \& Build Breaker](#️-cicd--build-breaker)
+- [📚 Documentation](#-documentation)
+  - [💻 Usage](#-usage)
+  - [📸 Screenshots](#-screenshots)
+  - [🔐 Security](#-security)
+    - [⚠️ Warning](#️-warning)
+  - [🗄 Database](#-database)
+- [📄 Changelog](#-changelog)
+- [📜 License](#-license)
+- [👤 Author](#-author)
+  - [🤝 Code Contributors](#-code-contributors)
 
 </details>
 
@@ -94,4 +99,6 @@ This project is licensed under the Apache 2.0 License - see the LICENSE file for
 
 ---
 
-**Happy coding! 🚀** 🖖
+**Happy coding!** 🚀 🖖
+
+<p align="right">(<a href="#top">back to top</a>)</p>
