@@ -16,9 +16,6 @@
   html {
     font-display: swap;
   }
-  body {
-    background-color: var(--bg);
-  }
 }
 
 @view-transition {
