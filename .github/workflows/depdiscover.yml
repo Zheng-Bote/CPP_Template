@@ -1,0 +1,66 @@
+name: Dependency Scan (depdiscover)
+
+run-name: Manual depdiscover Build by ${{ github.actor }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies (Conan)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget pipx cmake ninja-build build-essential
+          pipx install conan
+          conan profile detect --force
+
+      - name: Build Project
+        # Ensure compile_commands.json and libs.txt are generated using Conan
+        run: |
+          conan install . --output-folder=build --build=missing
+          cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cmake --build build
+
+      - name: Run depdiscover Action
+        uses: Zheng-Bote/depdiscover@v1
+        with:
+          project-name: "MyProject"
+          compile-commands: "build/compile_commands.json"
+          libs: "build/libs.txt"
+          fail-on-cvss: 7.0
+
+      - name: Upload SBOM and Security Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: depdiscover-reports
+          path: data/reports/
+
+      - name: Commit depdiscover reports
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Reports hinzufügen
+          git add data/reports || true
+
+          # Nur committen, wenn es Änderungen gibt
+          if ! git diff --cached --quiet; then
+            git commit -m "Add depdiscover reports [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi

@@ -3,7 +3,7 @@ description: GitHub Action to generate TOC in Markdown files.
 author: Zheng Robert
 
 branding:
-  icon: "Sternchen"
+  icon: "alert-circle"
   color: "red"
 
 # inputs still under construction
@@ -29,6 +29,7 @@ inputs:
     required: false
   FOLDING:
     description: Whether to fold.
+    default: "true"
     required: false
 
 runs:
