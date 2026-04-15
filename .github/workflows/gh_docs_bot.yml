@@ -25,13 +25,13 @@ jobs:
       - name: Build and Generate Site
         uses: Zheng-Bote/gha_ghpages@v2.1.0
         with:
-          template: "ghp_build/template/fluid_template.html"
-          assets: "ghp_build/theme/fluid/assets"
+          template: "ghp_build/templates/fluid_template.html"
+          assets: "ghp_build/themes/fluid/assets"
           output: "public"
           docs: "docs"
           base_path: "https://zheng-bote.github.io/CPP_Template/"
           toc: true
-          plugins: "docs/plugins"
+          #plugins: "docs/plugins"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
