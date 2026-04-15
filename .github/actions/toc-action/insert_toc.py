@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Insert or update a Table of Contents between markers:
-  <!-- TOC START -->
-  <!-- TOC END -->
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 Features:
 - Parses headings level >= 2 (## ... ######)
@@ -29,9 +29,7 @@ def github_slugger(text, seen):
     s = "".join(ch for ch in s if not unicodedata.combining(ch))
     s = s.strip().lower()
 
-    # GitHub's slugger removes most punctuation but preserves hyphens.
-    # Keep letters, numbers, spaces and hyphens; remove other punctuation.
-    # Also remove control characters.
+    # Remove most punctuation but keep letters, numbers, spaces and hyphens
     s = re.sub(r"[^\w\s-]", "", s, flags=re.UNICODE)
 
     # Replace whitespace with hyphens
@@ -40,13 +38,12 @@ def github_slugger(text, seen):
     # Collapse multiple hyphens
     s = re.sub(r"-{2,}", "-", s)
 
-    # Trim leading/trailing hyphens (GitHub keeps leading hyphen if it was present in text;
-    # but after removing punctuation, leading hyphens from original text remain.
-    # To emulate common GitHub behavior, keep leading hyphen if present in original text.)
-    # We approximate by trimming only if the slug is all hyphens or empty.
-    s = s.strip("-")
-    if s == "":
-        s = "-"  # fallback to single hyphen if nothing left
+    # IMPORTANT: do NOT strip leading hyphens here.
+    # GitHub preserves a leading hyphen if the original text started with a non-word
+    # character followed by a space (e.g. "📜 License" -> "-license").
+    # Only handle the empty case:
+    if s == "" or all(ch == "-" for ch in s):
+        s = "-"  # fallback to single hyphen if nothing meaningful left
 
     # Ensure uniqueness
     base = s
