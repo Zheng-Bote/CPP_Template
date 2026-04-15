@@ -1,0 +1,1 @@
+import{aB as r,a5 as d}from"./custom-element.js";r();function h(n,t){d(()=>{var e=n.getRootNode(),o=e.host?e:e.head??e.ownerDocument.head;if(!o.querySelector("#"+t.hash)){const a=document.createElement("style");a.id=t.hash,a.textContent=t.code,o.appendChild(a)}})}export{h as a};
