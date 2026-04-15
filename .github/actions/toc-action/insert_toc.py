@@ -65,7 +65,7 @@ def build_toc(headings, collapsed):
         lines.append(f"{indent}- [{text}](#{anchor})")
     toc_body = "\n".join(lines)
     if collapsed:
-        return f"\n---\n<details>\n<summary>Table of Contents</summary>\n\n{toc_body}\n\n</details>\n---\n"
+        return f"<details>\n<summary>Table of Contents</summary>\n\n{toc_body}\n\n</details>"
     return toc_body
 
 def collect_headings(text):
