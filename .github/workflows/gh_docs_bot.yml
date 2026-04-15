@@ -29,9 +29,9 @@ jobs:
           assets: "ghp_build/theme/fluid/assets"
           output: "public"
           docs: "docs"
-          base_path: "https://zheng-bote.github.io/gha_ghpages/"
+          base_path: "https://zheng-bote.github.io/CPP_Template/"
           toc: true
-          plugins: "docs/plugins"          
+          plugins: "docs/plugins"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

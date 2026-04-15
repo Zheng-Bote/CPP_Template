@@ -1,6 +1,17 @@
 name: Update Markdown TOC
 
-# Glob‑Support ist eingebaut (z. B. docs/**/*.md).
+# Author: Robert Zheng
+# created: 2026-04-15
+# updated: 2026-04-15
+# version: 1.0.0
+# description: update markdown table of contents
+
+run-name: Update Markdown TOC by ${{ github.actor }}
+
+# Glob‑Support eg.: docs/**/*.md
+# MARKER_START = "<!-- START doctoc generated TOC please keep comment here to allow auto update -->"
+# MARKER_END = "<!-- END doctoc generated TOC please keep comment here to allow auto update -->"
+# SKIP_FLAG = "<!-- DOCTOC SKIP -->"
 
 on:
   push:
@@ -12,7 +23,7 @@ on:
       files:
         description: "Comma-separated files or globs"
         required: false
-        default: "./README.md"
+        default: "./README.md, docs/**/*.md"
       collapsed:
         description: "true = collapsed <details>, false = expanded"
         required: false
